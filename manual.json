@@ -1,0 +1,94 @@
+{
+    "chapters": [
+        {
+            "title": "Podstawy języka Python",
+            "subtopics": [
+                {
+                    "title": "Czym jest Python?",
+                    "summary": "Python to język programowania wysokiego poziomu, łatwy w nauce i użyciu. Popularny w bioinformatyce ze względu na swoje wsparcie dla analizy danych i integracji z bibliotekami.",
+                    "example": "print('Hello, World!')"
+                },
+                {
+                    "title": "Historia Pythona",
+                    "summary": "Język Python został stworzony przez Guido van Rossuma w latach 90. jako następca języka ABC.",
+                    "example": "Python 3.0 wprowadzony w 2008 roku znacząco różni się od wersji 2.x."
+                }
+            ]
+        },
+        {
+            "title": "Instalacja i IDE",
+            "subtopics": [
+                {
+                    "title": "Instalacja Pythona",
+                    "summary": "Instrukcja instalacji Pythona na różnych systemach operacyjnych, w tym Windows, Linux i MacOS.",
+                    "example": "Komenda w terminalu: python --version"
+                },
+                {
+                    "title": "Popularne IDE",
+                    "summary": "IDE takie jak Thonny, Visual Studio Code i Jupyter Notebook ułatwiają pisanie kodu w Pythonie.",
+                    "example": "Kod w Jupyter Notebook: print('Python w notatniku!')"
+                }
+            ]
+        },
+        {
+            "title": "Składnia i podstawowe typy danych",
+            "subtopics": [
+                {
+                    "title": "Zmienne i typy danych",
+                    "summary": "Zmienne w Pythonie są dynamiczne, a typy danych obejmują int, float, str, bool i inne.",
+                    "example": "liczba = 10; tekst = 'Hello'; czy_prawda = True"
+                },
+                {
+                    "title": "Komentarze w Pythonie",
+                    "summary": "Komentarze mogą być jedno- lub wieloliniowe i służą do opisywania kodu.",
+                    "example": "# To jest komentarz\n'''To jest komentarz wieloliniowy'''"
+                }
+            ]
+        },
+        {
+            "title": "Struktury danych",
+            "subtopics": [
+                {
+                    "title": "Listy, krotki, zbiory i słowniki",
+                    "summary": "Listy i krotki to sekwencje, zbiory przechowują unikalne elementy, a słowniki działają w parze klucz-wartość.",
+                    "example": "lista = [1, 2, 3]; zbiór = {1, 2, 3}; słownik = {'klucz': 'wartość'}"
+                },
+                {
+                    "title": "Operacje na strukturach danych",
+                    "summary": "Metody sort(), append() dla list, oraz metody dla słowników jak keys() i values().",
+                    "example": "lista.append(4); wartości = słownik.values()"
+                }
+            ]
+        },
+        {
+            "title": "Instrukcje warunkowe i pętle",
+            "subtopics": [
+                {
+                    "title": "If, elif, else",
+                    "summary": "Instrukcje warunkowe do podejmowania decyzji w kodzie.",
+                    "example": "if x > 10:\n    print('Większe niż 10')"
+                },
+                {
+                    "title": "Pętle for i while",
+                    "summary": "Pętle umożliwiają iterację po elementach lub wykonywanie kodu wielokrotnie.",
+                    "example": "for i in range(5):\n    print(i)"
+                }
+            ]
+        },
+        {
+            "title": "Funkcje i programowanie obiektowe",
+            "subtopics": [
+                {
+                    "title": "Tworzenie funkcji",
+                    "summary": "Funkcje w Pythonie definiujemy za pomocą słowa kluczowego def.",
+                    "example": "def dodaj(a, b):\n    return a + b"
+                },
+                {
+                    "title": "Podstawy OOP",
+                    "summary": "Programowanie obiektowe polega na definiowaniu klas i tworzeniu obiektów.",
+                    "example": "class Klasa:\n    def __init__(self, x):\n        self.x = x"
+                }
+            ]
+        }
+    ]
+}
