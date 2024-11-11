@@ -13,10 +13,19 @@ RESET_HOURS = 24
 
 # Funkcja do uzyskania adresu IP użytkownika
 def get_user_ip():
-    ctx = get_script_run_ctx()
-    if ctx is not None:
-        return ctx.request_headers.get("X-Forwarded-For", "127.0.0.1").split(",")[0]
-    return "127.0.0.1"
+    try:
+        # Pobierz kontekst sesji
+        ctx = get_script_run_ctx()
+        if ctx and "X-Forwarded-For" in ctx.request_headers:
+            # Pobierz IP z nagłówków
+            return ctx.request_headers.get("X-Forwarded-For", "127.0.0.1").split(",")[0]
+        else:
+            # Jeśli nagłówki nie są dostępne, użyj adresu lokalnego
+            return "127.0.0.1"
+    except Exception as e:
+        # Obsłuż wszelkie inne błędy i zwróć IP lokalne
+        st.error(f"Błąd podczas pobierania adresu IP: {e}")
+        return "127.0.0.1"
 
 # Utwórz bazę danych SQLite
 def create_database():
