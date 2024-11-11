@@ -106,7 +106,7 @@ st.title("🐍 Python Learning Assistant")
 st.markdown("""
     <div style='background-color: #f0f2f6; padding: 1rem; border-radius: 10px; margin-bottom: 2rem;'>
         <h3 style='margin: 0; color: #0e1117;'>Dzień dobry Słuchaczu studiów podyplomowych!</h3>
-        <p style='margin: 0.5rem 0 0 0;'>Jestem asystentem do przedmiotu <b>Podstawy programowania w języku Python</b>. 
+        <p style='margin: 0.5rem 0 0 0; color: #0e1117;'>Jestem asystentem do przedmiotu <b>Podstawy programowania w języku Python</b>. 
         W czym mogę Ci dzisiaj pomóc?</p>
     </div>
 """, unsafe_allow_html=True)
