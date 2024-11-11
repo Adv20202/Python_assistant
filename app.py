@@ -50,7 +50,7 @@ def update_user_data(user_id, query_count, reset_time):
 # Funkcja do obsługi agenta
 def query_agent(prompt, context):
     try:
-        # Zmiana składni na nową metodę API
+        # Nowa metoda korzysta z klienta i poprawnego endpointu
         response = openai.ChatCompletion.create(
             model="gpt-4-turbo",
             messages=[
@@ -59,11 +59,9 @@ def query_agent(prompt, context):
             ],
             max_tokens=500
         )
-        return response["choices"][0]["message"]["content"]
-    except Exception as e:
-        # Obsługa błędów
-        st.error(f"Błąd API OpenAI: {str(e)}")
-        return "Przepraszam, wystąpił problem z OpenAI API."
+        return response.choices[0].message["content"]
+    except openai.error.OpenAIError as e:
+        return f"Błąd API OpenAI: {str(e)}"
 
 # Funkcja do uzyskania unikalnego ID użytkownika
 def get_user_id():
@@ -105,11 +103,9 @@ if st.button("Wyślij"):
     if query_count >= QUERY_LIMIT:
         st.error("Przekroczono dzienny limit zapytań. Spróbuj ponownie za 24 godziny!")
     elif user_query:
-        # Zaktualizuj licznik zapytań
         query_count += 1
         update_user_data(user_id, query_count, reset_time.strftime("%Y-%m-%d %H:%M:%S"))
         
-        # Uzyskaj odpowiedź od agenta
         context = """
         Jesteś pomocnym asystentem do nauki programowania w języku Python. Odpowiadasz tylko na pytania związane z Pythonem.
         """
