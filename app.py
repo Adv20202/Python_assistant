@@ -41,18 +41,17 @@ def update_user_data(user_id, query_count, reset_time):
         INSERT INTO users (user_id, query_count, reset_time)
         VALUES (?, ?, ?)
         ON CONFLICT(user_id) DO UPDATE SET
-            query_count = ?,
-            reset_time = ?
-    """, (user_id, query_count, reset_time, query_count, reset_time))
+            query_count = excluded.query_count,
+            reset_time = excluded.reset_time
+    """, (user_id, query_count, reset_time))
     conn.commit()
     conn.close()
 
 # Funkcja do obsługi agenta
 def query_agent(prompt, context):
     try:
-        # Nowa metoda korzysta z klienta i poprawnego endpointu
         response = openai.ChatCompletion.create(
-            model="gpt-4-turbo",
+            model="gpt-4-turbo",  # Użyj poprawnej nazwy modelu
             messages=[
                 {"role": "system", "content": context},
                 {"role": "user", "content": prompt}
@@ -86,12 +85,16 @@ if user_data:
     reset_time = datetime.strptime(reset_time, "%Y-%m-%d %H:%M:%S")
 else:
     query_count = 0
-    reset_time = datetime.now()
+    reset_time = datetime.now() + timedelta(hours=RESET_HOURS)
+    # Zapisz początkowe dane użytkownika w bazie
+    update_user_data(user_id, query_count, reset_time.strftime("%Y-%m-%d %H:%M:%S"))
 
 # Sprawdź, czy licznik zapytań należy zresetować
 if datetime.now() > reset_time:
     query_count = 0
     reset_time = datetime.now() + timedelta(hours=RESET_HOURS)
+    # Aktualizuj dane w bazie danych po zresetowaniu
+    update_user_data(user_id, query_count, reset_time.strftime("%Y-%m-%d %H:%M:%S"))
 
 # Wyświetl pozostały limit zapytań
 st.write(f"Pozostałe zapytania na dziś: {QUERY_LIMIT - query_count}/{QUERY_LIMIT}")
@@ -104,6 +107,7 @@ if st.button("Wyślij"):
         st.error("Przekroczono dzienny limit zapytań. Spróbuj ponownie za 24 godziny!")
     elif user_query:
         query_count += 1
+        # Aktualizuj dane użytkownika w bazie danych
         update_user_data(user_id, query_count, reset_time.strftime("%Y-%m-%d %H:%M:%S"))
         
         context = """
